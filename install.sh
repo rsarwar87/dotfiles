@@ -4,6 +4,8 @@ nargs=$#
 
 DATE=$("%d%m%Y")
 N=1
+USER=$1
+
 
 # Increment $N as long as a directory with that name exists
 while [[ -d "backup-$DATE-$N" ]] ; do
@@ -37,32 +39,48 @@ BDIR=backup-$DATE-$N
     apt install git ntp xtightvncviewer ssh cifs-utils iftop iotop htop libpam-mount python3 python3-requests tmux neovim python3-pip python-pip fonts-powerline wmctrl python python-numpy python-setuptools  -y
  fi
 curl -L https://get.oh-my.fish | fish
-
+pip install isort
+pip3 install isort
+pip install neovim
+pip3 install neovim
 #
 # copy configuration files and ccfe utilities
 #
- 
+
  #backup
  cp ~/.config/nvim/init.vim $BDIR/. -rv
  cp ~/.config/fish/config.fish $BDIR/. -rv
  cp ~/.config/tmux/.tmux.conf* $BDIR/. -rv
  #tmux neovim
- 
  cp .config/* ~/.config/ -rv
  cp .config/nvim/init2.vim ~/.config/nvim/init.vim -rv
  mkdir -p ~/.local/share/nvim/plugged
+ mkdir -p ~/.local/share/nvim/shada
+ touch ~/.local/share/nvim/shada/main.shada
+ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
  cp .tmux* ~/. -rv
- # vimrc
- echo "\"set g:go_version_warning = 0" >> ~/.vimrc
- echo "set number" >> ~/.vimrc
- echo "\"syntax on" >> ~/.vimrc
  # base/input for sunOS and color scheme for sunOS
  cp ~/.bash* $BDIR/. -rv
  cp ~/.inputrc* $BDIR/. -rv
- cp ~/.Xres* $BDIR/ -rv.
- cp .bash* ~/ -rv.
- cp .inputrc ~/. -rv
- cp .Xres* ~/. -rv
+ cp ~/.Xres* $BDIR/. -rv
+ cp ~/.env* $BDIR/. -rv
+ cp ./.bash* ~/. -rv
+ cp ./.inputrc ~/. -rv
+ cp ./.Xres* ~/. -rv
+ cp ./.env* ~/. -rv
+ echo ""
+ echo ""
+ echo ""
+ chown -R $USER:$USER ~/.inputrc
+ chown -R $USER:$USER ~/.bashrc
+ chown -R $USER:$USER ~/.Xresources
+ chown -R $USER:$USER ~/.env
+ chown -R $USER:$USER ~/.env_linux
+ chown -R $USER:$USER ~/.bash_aliases
+ chown -R $USER:$USER ~/.tmux.con*
+ chown -R $USER:$USER ~/.config/nvim/
+ chown -R $USER:$USER ~/.config/tmux
+ chown -R $USER:$USER ~/.local/share/nvim
 
  #get vimrc #### https://github.com/amix/vimrc
  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
@@ -71,16 +89,17 @@ curl -L https://get.oh-my.fish | fish
 
  #install neovim plugins
  #nvim +PluginInstall +qall
- nvim -E -c PlugInstall -c q 
+ nvim -E -c PlugInstall -c q
  ~/.local/share/nvim/plugged/YouCompleteMe/install.py
 
 #
 # CCFE stuff
 #
- cp packages/usr/bin/gimme ~/bin/.
+
+git submodule update --init -- packages
+cp packages/usr/bin/gimme ~/bin/.
  # create mount point for CCFE shares mounted by pam_mount
- if [ $nargs -ge 1  ]; then
-    git submodule update --init -- packages
+ if [ $nargs -ge 2  ]; then
     if [[ ! -e  /network ]]; then
         mkdir /network
         chmod 755 /network
