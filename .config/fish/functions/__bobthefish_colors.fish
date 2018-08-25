@@ -450,8 +450,8 @@ function __bobthefish_colors -S -a color_scheme -d 'Define colors used by bobthe
 
       set -x color_path                  $selection $fg[2]
       set -x color_path_basename         $selection $fg[1] --bold
-      set -x color_path_nowrite          $selection $red[2]
-      set -x color_path_nowrite_basename $selection $red[2] --bold
+      set -x color_path_nowrite          $pink $black
+      set -x color_path_nowrite_basename $pink $black --bold
 
       set -x color_repo                  $green $bg
       set -x color_repo_work_tree        $selection $fg[2] --bold

@@ -29,10 +29,18 @@ set -q XDG_DATA_HOME
      set -g theme_project_dir_length 1
      set -g theme_newline_cursor yes
 
-function setenv; set -gx $argv; end
+function setexport; set -xU $argv; end
+function setexporta
+   if [ $argv[1] = PATH  ]
+      # Replace colons and spaces with newlines
+      set -xU PATH (echo $argv[2] | tr ': ' \n)
+   else
+      set -xU $argv
+   end
+end
 function setalias; alias $argv; end
 source ~/.env
-
+source ~/.env_linux
 #
 #
 set -g __fish_git_prompt_show_informative_status 1
