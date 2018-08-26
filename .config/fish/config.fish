@@ -33,7 +33,9 @@ function setexport; set -xU $argv; end
 function setexporta
    if [ $argv[1] = PATH  ]
       # Replace colons and spaces with newlines
-      set -xU PATH (echo $argv[2] | tr ': ' \n)
+      set -xU PATH (echo $argv[2] | tr ': ' \n) $PATH
+      set -xU fish_user_path (echo $argv[2] | tr ': ' \n) $fish_user_path
+
    else
       set -xU $argv
    end
