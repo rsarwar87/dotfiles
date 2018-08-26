@@ -801,4 +801,6 @@ set foldcolumn=1
 
 
 
-
+set mouse=a
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
