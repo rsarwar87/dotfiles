@@ -111,7 +111,7 @@ set updatetime=500
 
 set laststatus=2
 let g:airline_powerline_fonts = 1
-let g:airline_theme = "dracula"
+let g:airline_theme = "gruvbox"
 
 " Jedi-vim configuration
 let g:jedi#show_call_signatures = 1 
