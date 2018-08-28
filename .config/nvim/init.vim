@@ -41,7 +41,7 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'altercation/solarized'
 Plug 'jonathanfilip/vim-lucius'
 
-
+Plug 'rhysd/vim-clang-format'
 " A wrapper around silversearcher-ag
 Plug 'rking/ag.vim'
 
@@ -804,3 +804,20 @@ set foldcolumn=1
 set mouse=a
 set guicursor+=n-v-c:blinkon0
 set guicursor+=i:blinkwait10
+
+"Clang settings
+let g:clang_format#code_style='llvm'
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true", "AlignConsecutiveDeclarations" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true", "AlignConsecutiveAssignments" : "true",
+            \ "Standard" : "C++11", "AlignTrailingComments" : "true", "AllowAllParametersOfDeclarationOnNextLine" : "false",
+            \ "BreakBeforeBraces" : "Allman", "AllowShortLoopsOnASingleLine" : "true"}
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+" if you install vim-operator-user
+autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
+" Toggle auto formatting:
+nmap <Leader>C :ClangFormatAutoToggle<CR>
