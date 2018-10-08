@@ -36,7 +36,7 @@ BDIR=backup-$DATE-$N
 
     apt update
     apt upgrade -y
-    apt install git ntp xtightvncviewer ssh cifs-utils iftop iotop htop libpam-mount python3 python3-requests tmux neovim python3-pip python-pip fonts-powerline wmctrl python python-numpy python-setuptools  -y
+    apt install git ntp xtightvncviewer ssh cifs-utils iftop iotop htop libpam-mount python3 python3-requests tmux neovim python3-pip python-pip fonts-powerline wmctrl python python-numpy python-setuptools cmake build-essential clang-format  -y
  fi
 curl -L https://get.oh-my.fish | fish
 pip install isort
@@ -95,7 +95,7 @@ pip3 install neovim
 #
 # CCFE stuff
 #
-
+exit(-1)
 git submodule update --init -- packages
 cp packages/usr/bin/gimme ~/bin/.
  # create mount point for CCFE shares mounted by pam_mount
