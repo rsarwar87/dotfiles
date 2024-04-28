@@ -24,11 +24,51 @@
     enable_tabline_filetype_icon = true
     enable_statusline_mode = false
 
+[[layers]]
+  name = "lang
+[layers]]
+  name = "lang#latex"
+[[layers]]
+  name = "lang#toml"
+[[layers]]
+  name = "checkers"
+[[layers]]
+  name = "git"
+  git_plugin = 'fugitive'
+[[layers]]
+  name = "fzf"
+[[layers]]
+  name = "lang#powershell"
+[[layers]]
+  name = "lang#python"
+  enable_typeinfo = true
+  format_on_save = true
+  enabled_linters = ['python', 'pylint']
+  python_file_head = [
+      '#!/usr/bin/env python',
+      '# -*- coding: utf-8 -*-',
+      '',
+      ''
+  ]
+[[layers]]
+    name = 'lang#c'
+    format_on_save = true
 # Enable autocomplete layer
+[[layers]]
+  name = "sudo"
+
+[[layers]]
+  name = "telescope"
 [[layers]]
 name = 'autocomplete'
 auto_completion_return_key_behavior = "complete"
 auto_completion_tab_key_behavior = "smart"
+
+[[layers]]
+name = "default"
+
+[[layers]]
+  name = "tmux"
 
 [[layers]]
 name = 'shell'
